@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>clint red</title>
+</head>
+<body>
+    <p style="font-size: 60px;" id="user">    </p>
+    <p style="font-size: 60px;" id="userInfo">    </p>
+
+    <input id="userName" type="text">
+    <br>
+    <button id="addUser">Add User</button>
+    <script>
+
+        fetch('http://localhost:3200/user/45')
+        .then(res=> res.json())
+        .then(data => {
+            document.getElementById('user').innerText = data;
+        })
+
+        // post data 
+        const addUser = document.getElementById('addUser')
+        addUser.addEventListener('click',()=>{
+            const name = document.getElementById('userName').value 
+            const user = {name}
+
+        fetch('http://localhost:3200/addUser',{
+            method: "post",
+            body:JSON.stringify(user),
+            headers: {
+            "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+        .then(res => res.json())
+        .then(data =>{
+             displayUser(data)
+            })
+    })
+    function displayUser(data) {
+        document.getElementById('userInfo').innerText = data.name
+
+    }
+
+    // get Data
+    fetch('http://localhost:3200/user')
+    .then(res => res.json())
+    .then(data => console.log(data))
+    </script>
+</body>
+</html>
