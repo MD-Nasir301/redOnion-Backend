@@ -21,7 +21,7 @@
             document.getElementById('user').innerText = data;
         })
 
-        // post data 
+        // post addUser
         const addUser = document.getElementById('addUser')
         addUser.addEventListener('click',()=>{
             const name = document.getElementById('userName').value 
@@ -43,6 +43,7 @@
         document.getElementById('userInfo').innerText = data.name
 
     }
+
 
     // get Data
     fetch('http://localhost:3200/user')
